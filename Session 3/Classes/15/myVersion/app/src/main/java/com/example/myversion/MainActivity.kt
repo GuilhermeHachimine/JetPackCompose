@@ -16,12 +16,8 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModelFactory = MainActivityViewModelFactory(125)
         viewModel = ViewModelProvider(this,viewModelFactory).get(MainActivityViewModel::class.java)
-        viewModel.totalData.observe(this, Observer {
-            binding.resultTextView.text = it.toString()
-        })
+        binding.myViewModel = viewModel
+        binding.lifecycleOwner = this
 
-        binding.insertButton.setOnClickListener {
-            viewModel.setTotal(binding.inputEditText.text.toString().toInt())
-        }
     }
 }
